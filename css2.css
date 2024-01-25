@@ -1,0 +1,27 @@
+#board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 160px;
+    margin-left: 30px;
+    padding-left: 180px;
+    border: 20px solid yellow;
+    margin: 150px;
+}
+
+#board div {
+    width: 100px;
+    height: 100px;
+    background-color: greenyellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+#time #score {
+    border: 20px solid yellow;
+    
+}
+

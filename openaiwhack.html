@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whac-A-Mole Game</title>
+    <style>
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        #board div {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        #score {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        #timer {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="startGame()">Start Game</button>
+    <div id="timer">Time: 0s</div>
+    <div id="score">Score: 0</div>
+    <div id="board">
+        <!-- Game tiles will be added dynamically here -->
+    </div>
+
+    <script>
+        let countdown;
+        let initialTime = 15; // Set your initial countdown time in seconds
+        let moleInterval;
+        let score = 0;
+
+        function startGame() {
+            setGame();
+        }
+
+        function setGame() {
+            createBoard();
+
+            // Start the countdown timer
+            countdown = initialTime;
+            updateTimerDisplay();
+            setInterval(updateTimer, 1000); // Update the timer every second
+
+            moleInterval = setInterval(setMole, 1000);
+        }
+
+        function updateTimer() {
+            if (countdown > 0) {
+                countdown--;
+                updateTimerDisplay();
+            } else {
+                // Game over logic
+                clearInterval(moleInterval);
+                alert("Game Over! Your final score is: " + score);
+                l();
+            }
+        }
+
+        function updateTimerDisplay() {
+            // Update the display of the countdown timer
+            document.getElementById("timer").innerText = "Time: " + countdown + "s";
+        }
+
+        function createBoard() {
+            const board = document.getElementById("board");
+
+            for (let i = 0; i < 9; i++) {
+                let tile = document.createElement("div");
+                tile.id = i.toString();
+                tile.addEventListener("click", whackMole);
+                board.appendChild(tile);
+            }
+        }
+
+        function setMole() {
+            // ... (your setMole logic)
+        }
+
+        function whackMole() {
+            if (this == currentMoleTile) {
+                score += 10;
+                document.getElementById("score").innerText = "Score: " + score;
+            }
+        }
+
+        function resetGame() {
+            countdown = initialTime;
+            updateTimerDisplay();
+            score = 0;
+            document.getElementById("score").innerText = "Score: 0";
+        }
+    </script>
+</body>
+</html>
